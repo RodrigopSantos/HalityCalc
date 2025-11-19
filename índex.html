@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora de Halitose | Hality</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 250px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #007a5e;
+      font-size: 26px;
+      text-align: center;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="radio"], input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    select {
+      padding: 6px;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    button {
+      background-color: #007a5e;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #005f49;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #e7f5ec;
+      border-left: 5px solid #007a5e;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ✅ Logo da Hality ajustado -->
+    <div class="logo">
+      <img src="https://i.imgur.com/5K4YhxW.png" alt="Logo Hality - Diagnóstico do Hálito">
+    </div>
+
+    <h1>🦷 Você tem mau hálito?</h1>
+    <p style="text-align:center;">Descubra com este escore simples!</p>
+
+    <form id="halitoForm">
+      <div class="question">
+        <label>Alguém já disse que você tem mau hálito?</label>
+        <input type="radio" name="alguemDisse" value="10"> Sim
+        <input type="radio" name="alguemDisse" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Qual a sua idade?</label>
+        <select name="idade">
+          <option value="0">Menor que 30 anos</option>
+          <option value="1">30 a 49 anos</option>
+          <option value="2">50 anos ou mais</option>
+        </select>
+      </div>
+
+      <div class="question">
+        <label>Você já consultou um especialista sobre isso?</label>
+        <input type="radio" name="consultou" value="2"> Sim
+        <input type="radio" name="consultou" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Você respira pela boca com frequência?</label>
+        <input type="radio" name="respira" value="2"> Sim
+        <input type="radio" name="respira" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Você escova a língua todos os dias?</label>
+        <input type="radio" name="lingua" value="0"> Sim
+        <input type="radio" name="lingua" value="1"> Não
+      </div>
+
+      <div class="question">
+        <label>Você sente gosto ruim na boca?</label>
+        <input type="radio" name="gosto" value="1"> Sim
+        <input type="radio" name="gosto" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Sua boca é seca com frequência?</label>
+        <input type="radio" name="seca" value="1"> Sim
+        <input type="radio" name="seca" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Você evita contato com pessoas por causa do hálito?</label>
+        <input type="radio" name="evita" value="1"> Sim
+        <input type="radio" name="evita" value="0"> Não
+      </div>
+
+      <div class="question">
+        <label>Como você classificaria o seu hálito?</label>
+        <select name="classificacao">
+          <option value="0">Não</option>
+          <option value="1">Leve</option>
+          <option value="2">Moderado</option>
+          <option value="3">Grave</option>
+        </select>
+      </div>
+
+      <button type="button" onclick="calcularPontuacao()">Ver Resultado</button>
+
+      <div class="result" id="resultado"></div>
+    </form>
+  </div>
+
+  <script>
+    function calcularPontuacao() {
+      const form = document.getElementById('halitoForm');
+      const dados = new FormData(form);
+      let total = 0;
+
+      for (let [chave, valor] of dados.entries()) {
+        total += parseInt(valor);
+      }
+
+      const resultado = document.getElementById('resultado');
+      resultado.style.display = 'block';
+
+      if (total < 10) {
+        resultado.innerHTML = `<strong>Resultado:</strong> ${total} pontos<br>
+        ✅ <strong>Baixo risco de halitose.</strong> Continue cuidando da sua higiene bucal!`;
+      } else {
+        resultado.innerHTML = `<strong>Resultado:</strong> ${total} pontos<br>
+        ⚠️ <strong>Possível halitose.</strong> Recomendamos procurar um especialista.`;
+      }
+    }
+  </script>
+</body>
+</html>
